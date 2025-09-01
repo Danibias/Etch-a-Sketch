@@ -4,4 +4,33 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}   
+}
+
+.canvas {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* grid styles */
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 512px;
+    margin: 1rem;     
+}
+
+.grid > .cell {
+    border: 1px solid black;
+    height: 2rem;
+    width: 2rem;
+}
+
+.cell:hover {
+    background-color: black;
+}
+
+

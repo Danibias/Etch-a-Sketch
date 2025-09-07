@@ -12,6 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 /* grid styles */
@@ -19,18 +21,14 @@
 .grid {
     display: flex;
     flex-wrap: wrap;
-    width: 512px;
-    margin: 1rem;     
+    width: 514px;
+    border: 1px solid black 
 }
 
 .grid > .cell {
-    border: 1px solid black;
     height: 2rem;
     width: 2rem;
-}
-
-.cell:hover {
-    background-color: black;
+   
 }
 
 

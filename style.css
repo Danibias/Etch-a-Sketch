@@ -28,7 +28,12 @@
 .grid > .cell {
     height: 2rem;
     width: 2rem;
-   
 }
 
+.btn-container {
+   gap: .5rem;
+}
 
+.btn {
+    padding: .5rem;
+}

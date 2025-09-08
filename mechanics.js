@@ -11,7 +11,7 @@ for (let i = 0; i < 16 * 16; i++) {
 // Hover effect 
 grid.addEventListener("mouseover", (e) => {
   if (e.target.classList.contains("cell")) {
-    e.target.style = "background: black";
+    e.target.style.background = "black";
   }
 }); 
 

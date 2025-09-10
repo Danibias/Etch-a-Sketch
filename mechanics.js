@@ -46,9 +46,6 @@ grid.addEventListener("mouseover", (e) => {
 });
 
 
-
-
-
 document.querySelector(".black").addEventListener("click" , () => {
   mode = "black";
 });

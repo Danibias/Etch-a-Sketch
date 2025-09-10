@@ -1,13 +1,73 @@
 // Canvas design
 const grid = document.querySelector(".grid");
 const layout = document.querySelector(".layout");
-const clear = document.querySelector(".clear")
 
-// Hover effect 
-grid.addEventListener("mouseover", (e) => {
-  if (e.target.classList.contains("cell")) {
-    e.target.style.background = "black";
+/**
+ * Hover Effects
+ */
+
+//Default Black
+let mode = "black";
+let darken = false;
+
+//RGB Mode
+const random255 = () => Math.floor(Math.random() * 256);
+const randomRGB  = () => `rgb(${random255()}, ${random255()}, ${random255()})`;
+
+const painter = (cell) => {
+  if (darken) {
+    //darken in 10 steps
+    cell.passes = (cell.passes || 0) +1;
+    if (cell.passes > 10) cell.passes = 10;
+
+    const lightness = 100 - cell.passes * 10; // 100 => 0 in %
+
+    // grayscale
+    if (mode === "black") {
+      cell.style.backgroundColor = `hsl(0 0% ${lightness}%)`;
+    
+    } else if (mode === "rgb") {
+        if (cell.hue == null) cell.hue = Math.floor(Math.random() * 360);
+        const s = 80; //saturation
+        cell.style.backgroundColor = `hsl(${cell.hue} ${s}% ${lightness}%)`;
+    }
+  } else {
+    if (mode === "black") {
+      cell.style.backgroundColor = "black";
+    } else if (mode === "rgb") {
+      cell.style.backgroundColor = randomRGB();
+    }
   }
+}
+
+grid.addEventListener("mouseover", (e) => {
+  if(!e.target.classList.contains("cell")) return;
+  painter(e.target);
+});
+
+
+
+
+
+document.querySelector(".black").addEventListener("click" , () => {
+  mode = "black";
+});
+
+document.querySelector(".rgb").addEventListener("click", () => {
+  mode = "rgb";
+});
+
+document.querySelector(".darken").addEventListener("click", () => {
+  darken =!darken;
+});
+
+//Clear 
+const clearBtn = document.querySelector(".clear");
+
+clearBtn.addEventListener("click", () => {
+  grid.querySelectorAll(".cell").forEach(cell => cell.style.background = "");
+  // reset to default mode
+  mode = "black";
 });
 
 // Remove the previous grid
@@ -41,20 +101,9 @@ layout.addEventListener("click", () => {
     alert("Enter a number between 1 and 100.");
     return;
   }
-
   // If valid, build new grid
   newGrid(value);
 });
-
-// Clear the grid
-const clearGrid = () => {
-  const cells = grid.querySelectorAll(".cell");
-  cells.forEach(cell => {
-    cell.style.background = "";
-  });
-};
-
-clear.addEventListener("click", clearGrid)
 
 newGrid(16);
 
